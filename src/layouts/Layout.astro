@@ -1,0 +1,163 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  canonical = Astro.url.href,
+  ogImage = '/og-image.jpg',
+} = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Karskiy — Full-Stack WordPress Developer',
+  url: 'https://karskiy.com',
+  description: 'Expert freelance WordPress developer offering full-cycle web development: custom themes, plugins, WooCommerce stores, UI/UX design, Figma, SEO, Tailwind CSS, Bootstrap, and VPS server configuration.',
+  image: 'https://karskiy.com/og-image.jpg',
+  priceRange: '$$',
+  areaServed: [
+    { '@type': 'Place', name: 'United States' },
+    { '@type': 'Place', name: 'Europe' },
+    { '@type': 'Place', name: 'Australia' },
+    { '@type': 'Place', name: 'Worldwide' },
+  ],
+  founder: {
+    '@type': 'Person',
+    name: 'Karskiy',
+    url: 'https://karskiy.com',
+    jobTitle: 'Full-Stack Web Developer & Designer',
+    knowsAbout: [
+      'WordPress Development',
+      'WooCommerce',
+      'Custom Plugin Development',
+      'Custom Theme Development',
+      'UI/UX Design',
+      'Figma',
+      'Responsive Web Design',
+      'Tailwind CSS',
+      'Bootstrap',
+      'SEO Optimization',
+      'Front-End Development',
+      'HTML/CSS',
+      'JavaScript',
+      'PHP',
+      'VPS Server Administration',
+      'Web Performance Optimization',
+    ],
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Web Development Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Custom WordPress Development',
+          description: 'Custom themes, plugins, and full WordPress site builds of any complexity.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'WooCommerce Store Development',
+          description: 'Complete e-commerce solutions with WooCommerce, payment integrations, and custom functionality.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'UI/UX Design & Figma Prototyping',
+          description: 'Interface design, prototyping in Figma, and user experience optimization.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Front-End Development',
+          description: 'Pixel-perfect responsive layouts with Tailwind CSS, Bootstrap, or custom CSS.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'SEO Optimization',
+          description: 'Technical SEO, on-page optimization, and performance tuning for better search rankings.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'VPS Server Setup & Administration',
+          description: 'Server configuration, optimization, security hardening, and deployment automation.',
+        },
+      },
+    ],
+  },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Karskiy" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Geo Targeting -->
+    <meta name="geo.region" content="US" />
+    <meta name="geo.placename" content="United States" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site).href} />
+    <meta property="og:site_name" content="Karskiy" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site).href} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- JSON-LD Structured Data -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
