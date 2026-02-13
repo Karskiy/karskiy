@@ -1,4 +1,7 @@
+# https://karskiy.com
+
 User-agent: *
 Allow: /
 
+# Sitemap
 Sitemap: https://karskiy.com/sitemap-index.xml

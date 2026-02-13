@@ -6,7 +6,11 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://karskiy.com',
   trailingSlash: 'never',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      lastmod: new Date(),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
